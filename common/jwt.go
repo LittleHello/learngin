@@ -1,4 +1,4 @@
-package controller
+package common
 
 import (
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -9,15 +9,15 @@ import (
 const uName, psw = "123", "123"
 
 type Login struct {
-	Username string `form:"username" binding:"username"`
-	Password string `form:"username" binding:"username"`
+	Username string `form:"username" binding:"required"`
+	Password string `form:"password" binding:"required"`
 }
 
 type User struct {
 	Username string
 }
 
-var authMiddleware, err = jwt.New(&jwt.GinJWTMiddleware{
+var AuthMiddleware, err = jwt.New(&jwt.GinJWTMiddleware{
 	Key:         []byte{},
 	Timeout:     time.Minute * 3,
 	IdentityKey: "id",
